@@ -248,23 +248,22 @@ To change your name:
 
 Run: nano index.html
 
-Replace “ROBERT SMITH'S CYBER BLOG” with your name/text.
+1.Replace “ROBERT SMITH'S CYBER BLOG” with your name/text.
 
-Replace “Hi, I'm Robert!” with your name/text.
+2.Replace “Hi, I'm Robert!” with your name/text.
 
-To change your email:
+3.To change your email:
+In the same index.html file, replace "aaggarwal@2ucom" with your email address.
 
-In the same index.html file, replace “aaggarwal@2u.com” with your email address.
+4.To change your LinkedIn profile link:
+In the same index.html file, replace “https//wwwlinkedincom/” with the link to your LinkedIn profile.
 
-To change your LinkedIn profile link:
-
-In the same index.html file, replace “https://www.linkedin.com/” with the link to your LinkedIn profile.
-
-To change your introduction:
-
+5.To change your introduction:
 In the same index.html file, replace the paragraph beginning “This is a little introductory paragraph” with your own introduction.
 
-To change your picture using your LinkedIn photo, follow these [instructions.](https://docs.google.com/document/d/1lpbrWN5r9vd6q2puH2jGycSlseouC-OgBGe7y2ijtqo/edit?usp=sharing)
+6.To change your picture using your LinkedIn photo, follow these [instructions.](https://docs.google.com/document/d/1lpbrWN5r9vd6q2puH2jGycSlseouC-OgBGe7y2ijtqo/edit?usp=sharing)
+
+![Screenshot 2024-10-05 163414](https://github.com/user-attachments/assets/1764f960-fab2-4a4d-88ab-a17bc6f2e17b)
 
 Next, write and edit two blog posts on any topics of your choice.
 
@@ -272,19 +271,14 @@ Once you've written your blog posts, add your posts to your cyber blog webpage b
 
 Blog Topic 1
 
-Change “Blog Post 1 Title” to the title of your first blog post.
+7.Change “Blog Post 1 Title” to the title of your first blog post.
 
-Change “Add Keywords” to relevant keywords for your post (e.g., IT, Cyber).
+8.Change “Add Keywords” to relevant keywords for your post (e.g., IT, Cyber).
 
-Change the section beginning “Add a short description here” to the text of your blog post.
+9.Change the section beginning “Add a short description here” to the text of your blog post.
 
-Blog Topic 2
-
-Change “Blog Post 2 Title” to the title of your second blog post.
-
-Change “Add Keywords” to relevant keywords for your post (e.g., SocialMedia, Github).
-
-Change the section beginning “Add a short description here” to the text of your blog post.
+Repeat the steps for blog 2
+![Screenshot 2024-10-05 164212](https://github.com/user-attachments/assets/29905bcc-7f52-4bcf-a746-fc31e4b96113)
 
 Restarting your virtual machine will often clear out any updates to your HTML files. Therefore, it is important to back them up every time you make an update!
 
