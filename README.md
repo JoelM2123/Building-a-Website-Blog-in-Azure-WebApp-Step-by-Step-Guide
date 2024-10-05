@@ -471,8 +471,28 @@ pkcs12: Indicates for OpenSSL to create a PFX certificate.
 
 
 After pressing Enter, you will be prompted for a password to encrypt your PFX key.
+
 Don't forget your password, as you will be prompted for it again shortly!
+
 The following image shows this step:
+![Screenshot 2024-10-05 174203](https://github.com/user-attachments/assets/03310b09-42ab-4685-b713-a59e96e476f1)
+
+View your new PFX certificate by running ls, as the following image shows:
+![Screenshot 2024-10-05 174245](https://github.com/user-attachments/assets/9691750d-3653-4e58-846b-93fec364959e)
+
+
+To download your new PFX certificate, complete the following four steps:
+
+(1) Under Manage Files Click the "Upload/Download" icon in the toolbar above your Cloud Shell window.
+
+(2) Select "Download."
+
+(3) Enter the name of your PFX certificate in the "Download a file" window.
+
+(4) Click "Download."
+
+
+The following image shows these steps:
 
 
 
