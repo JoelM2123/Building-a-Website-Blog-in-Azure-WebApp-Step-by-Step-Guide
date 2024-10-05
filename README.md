@@ -289,9 +289,11 @@ Change the section beginning “Add a short description here” to the text of y
 Restarting your virtual machine will often clear out any updates to your HTML files. Therefore, it is important to back them up every time you make an update!
 
 After each update to your webpage, use the following command to backup your index.html file to your /home directory, which stays persistent across reboots.
+
 cp /var/www/html/index.html /home
 
 In case you need to restore your index.html file, run the following command:
+
 cp /home/index.html /var/www/html/
 
 After you have saved and backed up your changes, return to your browser and refresh your webpage.
