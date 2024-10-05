@@ -151,7 +151,7 @@ In Part 3, we will use the Azure Cloud Shell to deploy a [Docker container](http
 
 For your web application, you will use a Docker container that has been added to Docker Hub. View the Docker container at the following [location](https://hub.docker.com/r/cyberxsecurity/project1-apachewebserver)
 
-Note that the Docker container image name is cyberxsecurity/project1-apachewebserver, as the following image shows: (Note this docker was provided for me in advance)
+Note that the Docker container image name is cyberxsecurity/project1-apachewebserver, as the following image shows: *this docker was provided for me in advance*
 ![Screenshot 2024-10-05 154816](https://github.com/user-attachments/assets/d6909059-1cb5-4b31-98d7-91aa9783df5e)
 
 Next, you will use the Azure Cloud Shell to deploy this container to your web application.
@@ -180,14 +180,135 @@ There are three types of commands that manage your web app container settings:
 2. az webapp config container set - This will set your web app container’s settings.
 3. az webapp config container show - This will display the current details of your web app container’s settings.
 
-To configure your web app with your provided container, run the following:az webapp config container set --name <name of your webapp> --resource-group <name of your resource group> --docker-custom-image-name <container-name> --enable-app-service-storage -t
+To configure your web app with your provided container, run the following:
 
+az webapp config container set --name <name of your webapp> --resource-group <name of your resource group> --docker-custom-image-name <container-name> --enable-app-service-storage -t
 
-For example: az webapp config container set --name bobssecurityresume2 --resource-group redteamRG --docker-custom-image-name cyberxsecurity/project1-apachewebserver:4.0 --enable-app-service-storage -t
+For example: 
+
+az webapp config container set --name bobssecurityresume2 --resource-group redteamRG --docker-custom-image-name cyberxsecurity/project1-apachewebserver:4.0 --enable-app-service-storage -t
+
 Note: You are using version 4.0 of the image
 
 After pressing enter, an output similar to the image below should appear:
+![Screenshot 2024-10-05 155406](https://github.com/user-attachments/assets/b8a6274d-50c0-4330-b889-98ae8ef6a7e1)
 
+
+IMPORTANT - If you get the error “(ResourceNotFound)” verify that the webapp name and resource group are correct (Case sensitive)
+
+To verify that the container has been added correctly, run the following command to show the container for your web app: 
+
+az webapp config container show --name <name of webapp> --resource-group <name of your resource group>
+
+For example: 
+
+az webapp config container show --name bobssecurityresume2 --resource-group redteamRG
+
+Now, check the unique domain that you selected to verify that the container has been successfully deployed.
+
+A cyber blog webpage that looks like the following image should appear (note that it may take five to eight minutes to load):
+![Screenshot 2024-10-05 155458](https://github.com/user-attachments/assets/c4e7e166-d3c9-4c5f-ad02-54f3245437b2)
+
+Now, we are ready to customize your web application!
+
+Part 4: Design Your Custom Web Application
+
+The container that you just loaded onto your web application is a framework for a cyber-blog page that you can customize.
+
+You will now customize the following elements of the webpage:
+
+Your name
+Your email
+Your LinkedIn profile link
+Your introduction
+Your picture
+Two custom blog posts on topics of your choice
+
+
+To design and customize your webpage, you'll need to access the [HTML](https://www.geeksforgeeks.org/what-is-html/) pages of your new web application.
+
+To access these pages, you need to [SSH](https://www.cloudflare.com/learning/access-management/what-is-ssh/#:~:text=The%20Secure%20Shell%20(SSH)%20protocol%20sets%20up%20encrypted#:~:text=The%20Secure%20Shell%20(SSH)%20protocol%20sets%20up%20encrypted) over to your container and access the HTML files.
+
+Return to your web app in Azure, under "Development Tools" select “SSH” from the left-hand toolbar, and then select “GO,” as shown in the following image:
+![Screenshot 2024-10-05 155700](https://github.com/user-attachments/assets/23fe4e84-1322-486f-a8a6-4d8cbf1df7d8)
+
+This will SSH you right into the container.
+
+Once you have access, change directories to the location where the HTML files are located by running 
+
+cd /var/www/html
+
+as the following image shows:
+
+![Screenshot 2024-10-05 155747](https://github.com/user-attachments/assets/61f74b01-79c8-43b4-8d59-38cbff9c3b9e)
+
+This directory contains the index.html file that makes up your webpage. To customize your webpage, complete the following steps:
+
+To change your name:
+
+Run: nano index.html
+
+Replace “ROBERT SMITH'S CYBER BLOG” with your name/text.
+
+Replace “Hi, I'm Robert!” with your name/text.
+
+To change your email:
+
+In the same index.html file, replace “aaggarwal@2u.com” with your email address.
+
+To change your LinkedIn profile link:
+
+In the same index.html file, replace “https://www.linkedin.com/” with the link to your LinkedIn profile.
+
+To change your introduction:
+
+In the same index.html file, replace the paragraph beginning “This is a little introductory paragraph” with your own introduction.
+
+To change your picture using your LinkedIn photo, follow these [instructions.](https://docs.google.com/document/d/1lpbrWN5r9vd6q2puH2jGycSlseouC-OgBGe7y2ijtqo/edit?usp=sharing)
+
+Next, write and edit two blog posts on any topics of your choice.
+
+Once you've written your blog posts, add your posts to your cyber blog webpage by completing the following steps:
+
+Blog Topic 1
+
+Change “Blog Post 1 Title” to the title of your first blog post.
+
+Change “Add Keywords” to relevant keywords for your post (e.g., IT, Cyber).
+
+Change the section beginning “Add a short description here” to the text of your blog post.
+
+Blog Topic 2
+
+Change “Blog Post 2 Title” to the title of your second blog post.
+
+Change “Add Keywords” to relevant keywords for your post (e.g., SocialMedia, Github).
+
+Change the section beginning “Add a short description here” to the text of your blog post.
+
+Restarting your virtual machine will often clear out any updates to your HTML files. Therefore, it is important to back them up every time you make an update!
+
+After each update to your webpage, use the following command to backup your index.html file to your /home directory, which stays persistent across reboots.
+cp /var/www/html/index.html /home
+
+In case you need to restore your index.html file, run the following command:
+cp /home/index.html /var/www/html/
+
+After you have saved and backed up your changes, return to your browser and refresh your webpage.
+
+Congratulations, you now have your own cloud-hosted web blog!
+
+So far we have...
+
+(1) - Created an Azure web app.
+(2a) - Choose a domain.
+(2b) - Mapped your custom domain to Azure's app service.
+(3) - Deployed a container on the web app.
+(4) - Designed your custom web application.
+(5) - Answered review questions.
+
+
+Completing these steps required you to leverage your terminal, systems administration, cloud, and automation skills. This is an impressive set of tools to have in your toolkit!
 
 
 
