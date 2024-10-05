@@ -53,7 +53,7 @@ Leave the default options for all of the other tabs. Select the “Review + Crea
 
 Select “Create” at the bottom of the screen to create your web app.
 
-Part 2 we will select our own unique domain name using GoDaddy. To do so, complete the following steps:
+Part 2 we will select our own [unique domain](https://www.anedot.com/blog/custom-domain#:~:text=Custom%20domains%20are%20set%20up%20by%20telling%20a%20page%20to#:~:text=Custom%20domains%20are%20set%20up%20by%20telling%20a%20page%20to) name using GoDaddy. To do so, complete the following steps:
 
 Navigate to [GoDaddy.com.](https://www.godaddy.com/)
 
@@ -83,6 +83,7 @@ Continue to cart
 Select a duration of one year to get the discounted price, then select “I’m Ready to Pay”
 
 Feel free to expirement with the names and prices to find a desirable outcome.
+
 ![Screenshot 6](https://github.com/user-attachments/assets/eecd199e-67e4-4c91-9d10-937cb53a58d6)
 
 Follow the steps to complete your payment.
