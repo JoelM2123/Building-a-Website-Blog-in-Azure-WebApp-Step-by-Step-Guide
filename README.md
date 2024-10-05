@@ -85,5 +85,26 @@ Select a duration of one year to get the discounted price, then select “I’m 
 Feel free to expirement with the names and prices to find a desirable outcome.
 ![Screenshot 6](https://github.com/user-attachments/assets/eecd199e-67e4-4c91-9d10-937cb53a58d6)
 
+Follow the steps to complete your payment.
+
+Once the purchase is complete, GoDaddy Airo will provide you with a free “Coming Soon” page.  Click the “Not Now” button NOT the “Publish” button
+![Screenshot 7](https://github.com/user-attachments/assets/6b8758a9-63dc-41cb-9baa-24f98a385a28)
+
+Part 2b: Map Your Custom Domain to Azure’s App Service
+
+In this part, we will point the DNS to Azure’s app service. To do so, complete the following steps:
+
+Return to the app that you created within Azure App Service.
+
+Under "Settings" Select “Custom domains” from the left-hand menu 
+
+Now we will add a custome comain 
+![Screenshot 2024-10-05 153007](https://github.com/user-attachments/assets/f8df5ca7-6911-48d5-bf35-f8a16b1ca204)
+
+Under Domain provider - Select “All other domain services”
+
+Under TLS/SSL certificate - Select Add certificate later
+
+Under Domain, enter the Domain you chose from GoDaddy
 
 
