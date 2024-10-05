@@ -12,3 +12,6 @@ Make sure that you're logged in to your personal [Azure account](https://portal.
 
 Select “App Services” from the Azure search field at the top of the page, as the following image shows:
 
+![Screenshot 1](https://github.com/user-attachments/assets/a91b1d0d-fd36-4ee1-8ec7-a659465f23ff)
+
+Select “+ Create” to create your application, as the following image shows:
