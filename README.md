@@ -31,7 +31,7 @@ Publish -> Select either "Code" (for typical web apps) or Docker (if you're usin
 
 Runtime Stack (software/instructions that are executed while your program is running, especially those instructions that you did not write explicitly, but are necessary for the proper execution of your code.) -> Select “PHP 8.2”
 
-Operating System -> Select “Linux.”
+[Operating System](https://www.geeksforgeeks.org/what-is-an-operating-system/) -> Select “Linux.”
 
 Region -> Select the geographic region where you want your app to be hosted.
 
@@ -53,6 +53,37 @@ Leave the default options for all of the other tabs. Select the “Review + Crea
 
 Select “Create” at the bottom of the screen to create your web app.
 
+Part 2 we will select our own unique domain name using GoDaddy. To do so, complete the following steps:
+
+Navigate to [GoDaddy.com.](https://www.godaddy.com/)
+
+Pick a website for your cyber-blog, but note the following:
+
+The 99 cent domains are usually “.club” or “.xyz,” and “.info” is $1.99 a year.
+
+After you pick the domain, the cost may increase after your first year—check carefully for this.
+
+The reccomondation is choosing a domain such as “bobscyberblog.club,” but you can pick any domain that you prefer:
+![Screenshot 5](https://github.com/user-attachments/assets/529ac2ac-7459-4f95-be6e-f154afbc1676)
+
+GoDaddy will provide you other domain options if your chosen domain is not available.
+
+Once you have chosen an available domain, click “Make it yours,”
+
+GoDaddy will offer alternatives that you can consider at different prices.  
+
+Click “Looks Good, Keep Going” to continue
+
+If you do not have a GoDaddy account, you will be prompted to create one.
+
+You DO NOT need Domain Protection or a custom email address for this project.
+
+Continue to cart
+
+Select a duration of one year to get the discounted price, then select “I’m Ready to Pay”
+
+Feel free to expirement with the names and prices to find a desirable outcome.
+![Screenshot 6](https://github.com/user-attachments/assets/eecd199e-67e4-4c91-9d10-937cb53a58d6)
 
 
 
