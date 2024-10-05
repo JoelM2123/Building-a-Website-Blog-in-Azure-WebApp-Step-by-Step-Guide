@@ -307,6 +307,178 @@ So far we have...
 Completing these steps required you to leverage your terminal, systems administration, cloud, and automation skills. This is an impressive set of tools to have in your toolkit!
 
 
+Secure Your Web Application with SSL Certificates (Azure Premium and GoDaddy Domain Version)
+
+We will now secure your web application. Specifically, we will:
+
+(1) Create a key vault.
+
+(2) Create a self-signed certificate.
+
+(3) Import and bind your self-signed certificate to your web app.
+
+(4) Create and bind an app service managed certificate.
+
+
+⚠️ Note: You will purposely create and add two types of SSL certificates to your web application to experience the advantages and disadvantages of each certificate.
+
+Resources
+
+[Azure Key Vaults](https://azure.microsoft.com/en-us/services/key-vault/#product-overview)
+
+[What is a self signed certificate?](https://sectigostore.com/page/what-is-a-self-signed-certificate/)
+
+[Binding Certificates in Azure](https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-bindings#bind-your-ssl-certificate)
+
+[Azure App Service Managed Certificates
+](https://azure.microsoft.com/en-us/updates/secure-your-custom-domains-at-no-cost-with-app-service-managed-certificates-preview/)
+[Azure App Service Documentation](https://docs.microsoft.com/en-us/azure/app-service/)
+
+Getting Started/Prerequisites
+Before getting started lets double check we have completed the following tasks so far:
+
+Created your own web application.
+
+Created your own unique domain name.
+
+Deployed a Docker container to your web application.
+
+Customized your web application with your own unique content.
+
+Part 1: Create a Key Vault
+
+In this first part,  we will create an Azure key vault. To do so, complete the following steps:
+
+Select "Key vaults" from the Azure search field at the top of the page, as the following image shows:
+![Screenshot 2024-10-05 170440](https://github.com/user-attachments/assets/cd3ccf60-dafe-45c9-abeb-b6f31619bc82)
+
+Select "+ Create" from the Key Vault page to create your key vault, as the following image shows:
+![Screenshot 2024-10-05 170523](https://github.com/user-attachments/assets/bc845b1c-88ba-4a45-964d-8c67709845c9)
+
+On the "Create key vault" tab, make the following selections:
+
+Subscription/Resource Group: Select the same subscription we used when making our web app
+
+Key Vault Name: Choose a key vault name, such as project1-KeyVault. (Note: This name must be globally unique, so you will be prompted to choose a different name if the one you enter has been used before.)
+
+Region: Select the same region that you selected before on our webapp.
+
+Pricing tier: Select the "Standard" tier.
+
+The following image shows the completed "Create key vault" tab:
+
+![Screenshot 2024-10-05 170625](https://github.com/user-attachments/assets/aa708d2e-8875-4aed-938e-67e83d680ec2)
+
+Click next to the Access Configuration Tab
+
+Select Vault Access Policy
+
+Check the box next to your user name
+
+Click Review + Create
+![Screenshot 2024-10-05 170703](https://github.com/user-attachments/assets/c09d3718-d22a-4474-aae6-6d41a3d5065f)
+
+After your key vault has been created, select your new resource to view your new key vault.
+
+Preview the options available on your key vault to store secure information, including:
+
+Keys
+
+Secrets
+
+Certificates
+
+The following image shows these options:
+
+![Screenshot 2024-10-05 170845](https://github.com/user-attachments/assets/7b39a0d1-6605-41df-87de-0ca276ed69e7)
+
+In this second half, we will return to the command line to create a self-signed certificate using OpenSSL. To do so, complete the following steps:
+
+From your Azure portal, access the same Cloud Shell that you accessed before to create a persistent storage mount, as the following image shows:
+
+![Screenshot 2024-10-05 171248](https://github.com/user-attachments/assets/5d4454ce-e583-4260-ad4b-b563657c890f)
+
+From this command line, you will now use the open source cryptography and SSL/TLS "toolkit" OpenSSL (it is preinstalled).
+
+Next, you will use OpenSSL to generate a self-signed certificate.
+
+-A self-signed certificate is a certificate that has not been signed by a certificate authority.
+
+-These certificates are simple to create and have no expense.
+
+-We will explore their advantages and disadvantages.
+
+From the command line, enter the following command
+
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout <privatekeyname.key> -out <certificatename.crt> -addext "extendedKeyUsage=serverAuth"
+
+For Example:
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout project1_key.key -out project1_cert.crt -addext "extendedKeyUsage=serverAuth"
+
+The following image shows this step:
+![Screenshot 2024-10-05 171435](https://github.com/user-attachments/assets/c4456ab7-d4e4-4f43-81ae-ccf79ab71af8)
+
+We added the following options:
+-x509: Indicates for OpenSSL to create an SSL certificate.
+-sha256: Uses the sha256 hashing algorithm.
+-nodes
+-days 365: States the certificate will be valid for one year.
+-newkey rsa:2048: Uses a 2048-bit RSA key.
+-keyout project1_key.key: The outputted name of the private key.
+-out project1_cert.crt: The outputted name of the certificate.
+-addext "extendedKeyUsage=serverAuth": Indicates how a public key can be used.
+
+Refer to the following [document](https://wiki.openssl.org/index.php/Command_Line_Utilities) for additional information on OpenSSL options.
+
+After pressing Enter, you will be asked several questions about your certificate. Answer the following:
+
+Country Name (2 letter code) [AU]: Enter your country.
+
+State or Province Name (full name) [Some State]: Enter your state.
+
+Locality Name (e.g., city) [ ]: Enter your city.
+
+Organization Name (e.g., company) [Internet Widgits Pty Ltd]: Enter "Student".
+
+Organizational Unit Name (e.g., section) [ ]: Leave blank by pressing Enter.
+
+Common Name (e.g., server FQDN or YOUR name) [ ]: Enter your full domain name, such as "bobsblog.com".
+
+Email Address [ ]: Leave blank by pressing Enter.
+
+The following image shows this step:
+![Screenshot 2024-10-05 171547](https://github.com/user-attachments/assets/9436bdc3-000d-4f04-822b-6f3976257ba6)
+
+Now, view your newly created key (.key) and certificate (.crt) by running ls, as the following image shows:
+
+![Screenshot 2024-10-05 171609](https://github.com/user-attachments/assets/0d33a2f0-29b4-435c-83d4-0eba856930c6)
+
+Note that Azure requires a PFX format for its certificates. The PFX format is the server certificate and the private key combined into a single encrypted file.
+
+To create a PFX format, run the following command:
+
+openssl pkcs12 -export -out <new_certificatename.pfx> -inkey <keyname.key> -in <certificename.crt>
+
+For Example:
+
+openssl pkcs12 -export -out project1_cert.pfx -inkey project1_key.key -in project1_cert.crt
+
+We added the following options:
+pkcs12: Indicates for OpenSSL to create a PFX certificate.
+-export -out project1_cert.pfx: States what to name the PFX file.
+-inkey project1_key.key: This is the current private key that you are importing.
+-in project1_cert.crt: This is the current certificate that you are importing.
+
+
+After pressing Enter, you will be prompted for a password to encrypt your PFX key.
+Don't forget your password, as you will be prompted for it again shortly!
+The following image shows this step:
+
+
+
+
+
+
 
 
 
