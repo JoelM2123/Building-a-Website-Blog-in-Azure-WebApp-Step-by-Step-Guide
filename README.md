@@ -606,6 +606,7 @@ When the pop-up appears on the right side of your screen, select your domain and
 ![Screenshot 2024-10-06 101224](https://github.com/user-attachments/assets/b897c036-7414-400a-b54d-c89252a25b60)
 
 Click Validate
+
 ![Screenshot 2024-10-06 101247](https://github.com/user-attachments/assets/6a15bab8-4bd2-4bbe-bbd3-4acbe722bd31)
 
 Click Add (NOTE - It may take up to 10 minutes to validate and add the managed certificate)
@@ -711,6 +712,7 @@ Select “Custom rules” from the toolbar on the left-hand side of the screen, 
 ![Screenshot 2024-10-06 103432](https://github.com/user-attachments/assets/eb458808-e649-48bf-975d-53c30dae9a8d)
 
 To create a custom rule, select “+ Add custom rule.”
+
 ![Screenshot 2024-10-06 103455](https://github.com/user-attachments/assets/0a68d4c6-c22a-4d6b-9e16-f0e575abd67e)
 
 When the pane pops up on the right, name your custom rule “Project1rule”.
@@ -732,6 +734,7 @@ Select the three countries (USA, Canada, Australia)
 Then: Deny traffic
 
 The following image shows these steps:
+
 ![Screenshot 2024-10-06 103528](https://github.com/user-attachments/assets/77b1b811-5e96-4550-8f5a-aed2f679ae7f)
 
 Then, click “Add.”
