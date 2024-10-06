@@ -280,6 +280,12 @@ Blog Topic 1
 Repeat the steps for blog 2
 ![Screenshot 2024-10-05 164212](https://github.com/user-attachments/assets/29905bcc-7f52-4bcf-a746-fc31e4b96113)
 
+If you'd like to take it a step further, you can also play around in the "/var/www/html/assets/css" directory where youll find a "style.css" Folder that should display as the following image:
+
+![Screenshot 2024-10-06 095439](https://github.com/user-attachments/assets/2b26c2c4-5de8-44c6-a99b-5075ece43321)
+
+This is where you can edit the font and coloring of your page!
+
 Restarting your virtual machine will often clear out any updates to your HTML files. Therefore, it is important to back them up every time you make an update!
 
 After each update to your webpage, use the following command to backup your index.html file to your /home directory, which stays persistent across reboots.
@@ -290,7 +296,8 @@ In case you need to restore your index.html file, run the following command:
 
 cp /home/index.html /var/www/html/
 
-After you have saved and backed up your changes, return to your browser and refresh your webpage.
+After you have saved and backed up your changes, return to your browser and refresh your webpage. Below is how my webpage looks!
+![Screenshot 2024-10-06 100308](https://github.com/user-attachments/assets/07dabfa2-e780-43a0-aed2-1f2f8fd19338)
 
 Congratulations, you now have your own cloud-hosted web blog!
 
@@ -306,6 +313,7 @@ So far we have...
 
 Completing these steps required you to leverage your terminal, systems administration, cloud, and automation skills. This is an impressive set of tools to have in your toolkit!
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Secure Your Web Application with SSL Certificates (Azure Premium and GoDaddy Domain Version)
 
@@ -493,6 +501,137 @@ To download your new PFX certificate, complete the following four steps:
 
 
 The following image shows these steps:
+![Screenshot 2024-10-06 100417](https://github.com/user-attachments/assets/4b3d0c06-4d17-4471-b526-95f02bcccefa)
+
+Import and Bind Your Self-Signed Certificate to Your Web App
+
+In this part, we will use Azure to import and bind the certificate that you just added to your web application. To do so, complete the following steps:
+
+From the Azure Portal, select "Key Vaults."
+
+Select the key vault that you created in Part 1.
+
+From your key vault, select "Certificates" and then "+ Generate/Import," as the following image shows:
+![Screenshot 2024-10-06 100511](https://github.com/user-attachments/assets/3a028db7-bf72-40c1-9132-e98428f0e5a3)
+
+On the "Create a certificate" page, select the following:
+
+Method of Certificate Creation: Import
+
+Certificate Name: project1PFX-cert
+
+Upload Certificate File: Select your PFX certificate (it's likely in your Downloads folder)
+
+Password: Enter the password that you created in Part 2
+
+The following image shows these steps:
+![Screenshot 2024-10-06 100542](https://github.com/user-attachments/assets/2792c1b9-efd7-4619-9af4-3908d241904a)
+
+
+Select "Create" to upload your certificate.
+
+The following success message should appear to confirm that your PFX certificate has been uploaded to your key vault:
+![Screenshot 2024-10-06 100605](https://github.com/user-attachments/assets/049538a9-5784-41b3-904d-fc909e7b82dc)
+
+Now that you have uploaded your certificate, it's time to add it to your web application. To do so, complete the following steps:
+
+Return to the web application (under "App Services") that we created in our first step.
+
+On this page, select "Certificates" as the following image shows:
+![Screenshot 2024-10-06 100704](https://github.com/user-attachments/assets/f46c067d-9e4e-44b4-887e-226b37d4b8f2)
+
+On this page, import your new PFX certificate from your key vault. To do so, complete the following steps:
+
+Select "Bring your own certificates."
+
+Click "+ add certificate."
+
+Under source, select Import from Key Vault
+
+Select the Key Vault you created earlier and the Certificate that you imported 
+
+The following image shows these steps:
+![Screenshot 2024-10-06 100756](https://github.com/user-attachments/assets/52fae22c-17a9-4ae1-a6b3-00a1760048f8)
+
+Return to Custom Domains and click Add Binding
+![Screenshot 2024-10-06 100820](https://github.com/user-attachments/assets/9b1d1bb3-e732-45fd-966a-de4d2bb6d6e5)
+
+From the Add TLS/SSL binding screen, select your certificate from the dropdown
+
+Leave TLS/SSL Type at SNI SSL as shown below and click “add”
+![Screenshot 2024-10-06 100849](https://github.com/user-attachments/assets/ffac73d5-ef9c-45d8-a3bc-dc5482d36a0c)
+
+Now, open a browser and access your web application.
+
+Did your browser return an error like the one shown in the following image?
+![Screenshot 2024-10-06 100929](https://github.com/user-attachments/assets/46d54e36-673e-4ac0-b5c6-8d2d2f5d984e)
+
+Note that this image is from the Chrome browser; the message may look slightly different depending on your browser.
+
+Let's examine the certificate that you just added. Click "Not secure" in the search bar if you are in Chrome, or a similar message depending on your browser, as shown in the following image:
+![Screenshot 2024-10-06 101043](https://github.com/user-attachments/assets/3d77e267-c822-4b41-89e5-aad1779fac4e)
+
+After selecting "Not secure," select "Certificate (Invalid)" from the menu to examine your certificate.
+
+Note the reason for your error based on the message on your certificate. This message is due to the fact that your certificate was created by you and not a trusted CA.
+
+Next, click the "Details" tab of your certificate, then select the "Subject" option, as the following image shows:
+![Screenshot 2024-10-06 101113](https://github.com/user-attachments/assets/91cc9c10-6c90-4d27-9afb-b96d04fe5b5a)
+
+Note the results that now display in the box on the bottom; these were the options that you selected when you created your certificate with OpenSSL.
+
+You have successfully created a self-signed certificate and bound it to your web application using Azure!
+
+
+Before continuing, make sure that you have completed the following critical tasks:
+✔️ Created your Azure key vault.
+✔️ Created a self-signed certificate using Open SSL.
+✔️ Imported and bound your self-signed certificate to your web app.
+
+Create and Bind an App Service Managed Certificate
+
+In this part, we will use Azure's managed certificate to create and bind a more secure certificate to your web application.
+
+You were just able to create and bind your own self-signed certificate to your web application to encrypt your web traffic. However, unfortunately, your browser displayed warnings to visitors that your website is not trusted and that there may be security risks associated with your web application. (Note that you will explore this issue further in the daily review questions.)
+
+You will now create and bind a more secure, trusted SSL certificate to your web app using Azure's cloud services. To do so, complete the following steps:
+
+First, Under "settings" return to "Certificates" under your web application.
+
+Select "Managed Certificates."
+
+Select "+ Add Certificate."
+
+When the pop-up appears on the right side of your screen, select your domain and click "Create," as the following image shows:
+![Screenshot 2024-10-06 101224](https://github.com/user-attachments/assets/b897c036-7414-400a-b54d-c89252a25b60)
+
+Click Validate
+![Screenshot 2024-10-06 101247](https://github.com/user-attachments/assets/6a15bab8-4bd2-4bbe-bbd3-4acbe722bd31)
+
+Click Add (NOTE - It may take up to 10 minutes to validate and add the managed certificate)
+
+Return to Custom Domains, select Add binding next to your domain name and select update binding
+![Screenshot 2024-10-06 101315](https://github.com/user-attachments/assets/538a01ba-f551-48b3-ac25-8bec438cf725)
+
+Select the Certificate you just created and click update
+![Screenshot 2024-10-06 101336](https://github.com/user-attachments/assets/3c99e64f-af7c-443e-9558-a68807596157)
+
+Now that your new app services managed certificate has been bound to your web application, revisit your website. You should not see any warnings displayed this time!
+
+Congratulations, you have now created a web application and secured it with a trusted SSL certificate!
+
+Milestone
+So far we have:
+
+(1) Created a key vault.
+
+(2) Created a self-signed certificate.
+
+(3) Imported and bound your self-signed certificate to your web app.
+
+(4) Created and bound an app service managed certificate.
+
+Completing these steps required you to leverage your terminal, systems administration, cloud, cryptography, and networking skills. This is an impressive set of tools to have in your toolkit!
 
 
 
