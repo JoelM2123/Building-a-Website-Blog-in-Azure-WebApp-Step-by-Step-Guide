@@ -319,9 +319,9 @@ Secure Your Web Application with SSL Certificates (Azure Premium and GoDaddy Dom
 
 We will now secure your web application. Specifically, we will:
 
-(1) Create a key vault.
+(1) Create a [key vault.](https://learn.microsoft.com/en-us/azure/key-vault/secrets/about-secrets)
 
-(2) Create a self-signed certificate.
+(2) Create a [self-signed certificate.](https://www.ssldragon.com/blog/what-is-self-signed-certificate/#:~:text=A%20self-signed%20certificate%20is%20a%20digital%20certificate%20signed,trust%20in%20public%20networks%20but%20suits%20specific%20scenarios.)
 
 (3) Import and bind your self-signed certificate to your web app.
 
@@ -633,16 +633,152 @@ So far we have:
 
 Completing these steps required you to leverage your terminal, systems administration, cloud, cryptography, and networking skills. This is an impressive set of tools to have in your toolkit!
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Protect Your Web Application with Azure’s Security Features 
+(Azure Free Domain and GoDaddy 99 Cent Domain)
+
+Moving forward we will protect our web application. Specifically, we will:
+
+Analyze [WAF](https://www.cloudflare.com/learning/ddos/glossary/web-application-firewall-waf/) rule sets.
+
+Configure custom WAF rules.
+
+Analyze and remediate Security Center recommendations.
+
+Conclude our project.
+
+Resources
+
+[Azure Web Application Firewall](https://docs.microsoft.com/en-us/azure/web-application-firewall/afds/afds-overview)
+
+[Azure Security Center Documentation](https://docs.microsoft.com/en-us/azure/security-center/)
+
+Before we start, we are required to have completed the following tasks Before:
+
+Created a key vault.
+
+Created a self-signed certificate.
+
+Imported and Bound your self-signed certificate to your web app (Paid domains)
+
+Created and Bound an App Service Managed Certificate (Paid domains)
+
+Analyzed and compared self-signed certificates and trusted certificates.
+
+Create a WAF
+
+In this part, we will begin by creating a WAF
+
+From your Azure portal, enter “web app” until “Web Application Firewall policies (WAF)” appears as one of the choices in the dropdown.
+
+Select that option. 
+
+Select “Create”
+
+Complete the Creation form similar to the below, be sure to select the “Regional WAF” as the Policy for.
+
+Choose a policy name and location based on your previous location choices.
+![Screenshot 2024-10-06 103245](https://github.com/user-attachments/assets/65e42fbb-8dda-4b76-a6e2-949a98a0ecb2)
+
+Analyze WAF Rule Sets
+
+Open the WAF resource you just created, and notice the options on the left side of your screen.
+
+Select “Managed rules” either from the left-hand toolbar or from the box on the bottom of the page, as the following image shows:
+![Screenshot 2024-10-06 103305](https://github.com/user-attachments/assets/c545fb37-8ed7-4e67-bcaf-ca1b10c17685)
+
+When the “Managed rules” page appears, scroll through the page to view the various rules, as shown in the following image: NOTE we wont actually be making any modications to these rules this is just for learning purposes
+![Screenshot 2024-10-06 103326](https://github.com/user-attachments/assets/9f67aee8-75df-4035-89d5-eec1d868c3a1)
+
+Note the following about these rules:
+This is the list of the application vulnerabilities that the WAF will protect against (we will explore these vulnerabilities in further detail in the Web Vulnerabilities module).
+While it’s unlikely that your web application would be impacted by these vulnerabilities, this exercise illustrates the Azure WAF feature, which identifies and blocks the application attacks indicated on this page.
+These managed rules can be individually enabled or disabled, and a variety of actions can be taken if an attack is identified, such as:
+Allow the request.
+Block the request.
+Log the request.
+Redirect the request to another webpage.
+
+Configure Custom WAF Rules
+
+In this part, you will configure a custom WAF rule to protect against a potential security attack.
+Let’s assume for this project that you have been experiencing a variety of attacks from international IP addresses, and you need to only accept traffic from the locations where your business partners reside: the United States, Canada, and Australia.
+
+Now, you’ll learn how to create a custom rule on your web application to protect against these attacks. To do so, complete the following steps:
+
+Select “Custom rules” from the toolbar on the left-hand side of the screen, as the following image shows:
+![Screenshot 2024-10-06 103432](https://github.com/user-attachments/assets/eb458808-e649-48bf-975d-53c30dae9a8d)
+
+To create a custom rule, select “+ Add custom rule.”
+![Screenshot 2024-10-06 103455](https://github.com/user-attachments/assets/0a68d4c6-c22a-4d6b-9e16-f0e575abd67e)
+
+When the pane pops up on the right, name your custom rule “Project1rule”.
+
+Leave the status and rule type at the default options.
+
+Set the priority to 100.
+
+Set the following terms for the rule’s condition:
+
+Match type: Geo location
+
+Match variable: Remoteaddr
+
+Operation: is not
+
+Select the three countries (USA, Canada, Australia)
+
+Then: Deny traffic
+
+The following image shows these steps:
+![Screenshot 2024-10-06 103528](https://github.com/user-attachments/assets/77b1b811-5e96-4550-8f5a-aed2f679ae7f)
+
+Then, click “Add.”
+
+Your custom rule should now display on the page, as the following image shows:
+![Screenshot 2024-10-06 103528](https://github.com/user-attachments/assets/4ff273e0-0851-411e-aefd-44876b8a9977)
+
+Congratulations! You have configured the WAF to restrict traffic from accessing your webpage unless the source IP is from the US, Canada, or Australia.
+
+Analyze and Fix a Security Center Recommendation
+
+Azure Security Center is a management system that provides best practices and recommendations to enhance the security of your cloud resources.
+
+While Azure provides tools to protect your cloud resources, it is up to you to apply the correct configurations and best practices to protect your web application.
+
+In this part, you will learn how to use Azure Security Center to analyze and fix a recommendation from the Security Center dashboard. To do so, complete the following steps:
+
+To access Azure Security Center, from your web app, select “Microsoft Defender for Cloud” from the toolbar on the left.
+![Screenshot 2024-10-06 103549](https://github.com/user-attachments/assets/582f411c-0e7a-4223-bada-b3bf73787a95)
+
+When the Security Center page opens, it should display counts for both recommendations and alerts (note that your counts may vary).
+
+Review the recommendations, and note that Azure describes the recommendations in this way: “Security Center continuously monitors the configuration of your app services to identify potential security vulnerabilities and recommends actions to mitigate them.”
+
+⚠️ Important: Your security recommendations may vary, or may not show up at all. If there are no security recommendations, skip ahead to Part 5, and return in a few hours to complete this section. If you have any, most security recommendations will appear within 24 hours.
 
 
+If your recommendations do not display, below is an example of security recommendations which may appear in this section.
 
+![Screenshot 2024-10-06 103657](https://github.com/user-attachments/assets/1e825b0b-2103-4db4-8912-c0e32b340bbd)
 
+Note that when you select on an individual recommendation, it will then display the recommended steps to remediate this recommendation.
 
+Congratulations on completing your first project!
 
+If you'd like you can stop here and Disable Any Paid Features
 
+As a reminder, you are provided a $200 credit through the free trail by Microsoft to use for the resources of Cloud Week and this project.
 
+You are welcome to delete your web application, but we strongly recommend keeping it up and maintaining your blog.
 
+Use the following [guide](https://docs.google.com/document/d/1ZzC4oTJFdlkkeWuzuJAyVSqtDFbuAWilmwXg8PZgzMs) to assist with monitoring and stopping your costs.
 
+-Interview and Resume Guidance
 
+When networking and talking to potential employers, you should be able to reference the work done on this project to answer specific interview questions or to demonstrate your skills within a specific domain.
+
+Refer to the following document for guidance on how to add your project to your resume, discuss your project, and answer potential interview questions regarding your project activities: [Interview and Resume Guidance.](https://docs.google.com/document/d/109tL6rqmKCyUKypLovcsyzxBofa8YjAwIqJEc_0OiQo/edit?usp=sharing)
 
 
